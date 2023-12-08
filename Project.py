@@ -16,7 +16,7 @@ class FlightBookingSystem:
     def search_flights(self, choice, value):
         matching_flights = []
         for flight_number, flight_info in self.flights.items():
-            if str(flight_info.get(choice)) == value:
+            if flight_number == value:
                 matching_flights.append((flight_number, flight_info))
                 return matching_flights
 
