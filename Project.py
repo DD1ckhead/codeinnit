@@ -13,10 +13,17 @@ class FlightBookingSystem:
             'arrival_time': arrival_time,
             }
 
-    def search_flights(self, choice, value):
+    def search_flight_by_number(self, value):
         matching_flights = []
         for flight_number, flight_info in self.flights.items():
             if flight_number == value:
+                matching_flights.append((flight_number, flight_info))
+                return matching_flights
+            
+    def search_flight_by_airport(self, value):
+        matching_flights = []
+        for flight_number, flight_info in self.flights.items():
+            if str(flight_info.get('current_airport')) == value:
                 matching_flights.append((flight_number, flight_info))
                 return matching_flights
 
@@ -43,7 +50,7 @@ def main():
 
         if choice == '1':
             flight_number = input("Enter the flight number: ")
-            matching_flights = flight_system.search_flights('flight_number', flight_number)
+            matching_flights = flight_system.search_flight_by_number(flight_number)
             if matching_flights:
                 for flight_number, flight_info in matching_flights:
                     display_flight_info(flight_number, flight_info)
@@ -51,7 +58,7 @@ def main():
                 print("No matching flights found.")
         elif choice == '2':
             current_airport = input("Enter the current airport: ")
-            matching_flights = flight_system.search_flights('current_airport', current_airport)
+            matching_flights = flight_system.search_flight_by_airport(current_airport)
             if matching_flights:
                 for flight_number, flight_info in matching_flights:
                     display_flight_info(flight_number, flight_info)
